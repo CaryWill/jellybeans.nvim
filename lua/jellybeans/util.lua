@@ -24,16 +24,6 @@ function util.onColorScheme()
 	end
 end
 
--- Change the background for the terminal, packer and qf windows
-util.contrast = function()
-	vim.cmd([[augroup jellybeans]])
-	vim.cmd([[  autocmd!]])
-	vim.cmd([[  autocmd ColorScheme * lua require("jellybeans.util").onColorScheme()]])
-	vim.cmd([[  autocmd TermOpen * setlocal winhighlight=Normal:NormalFloat,SignColumn:NormalFloat]])
-	vim.cmd([[  autocmd FileType packer setlocal winhighlight=Normal:NormalFloat,SignColumn:NormalFloat]])
-	vim.cmd([[  autocmd FileType qf setlocal winhighlight=Normal:NormalFloat,SignColumn:NormalFloat]])
-	vim.cmd([[augroup end]])
-end
 -- Loads the colors from the dictionary Object (colorSet)
 function util.loadColorSet(colorSet)
 	for group, colors in pairs(colorSet) do
