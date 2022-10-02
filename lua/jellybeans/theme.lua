@@ -50,6 +50,8 @@ local tea_green  ="#d2ebbe"
 local dell = "#437019"
 local calypso = "#2B5B77"
 
+local none = "NONE"
+
 -- Mapping
 local fg = foreground
 local bg = background 
@@ -94,7 +96,7 @@ local theme = {}
 theme.loadSyntax = function()
 	-- Syntax highlight groups
 	local syntax = {
-		Comment      = { fg = grey }, -- any comment
+    Comment  = { fg = gray }, -- any comment
     ColorColumn  = { bg = total_black }, -- used for the columns set with 'colorcolumn'
     Conceal      = { fg = morning_glory }, -- placeholder characters substituted for concealed text (see 'conceallevel')
     Cursor       = { fg = background, bg = perano }, -- character under the cursor
@@ -120,7 +122,7 @@ theme.loadSyntax = function()
     -- Substitute   = { }, -- |:substitute| replacement text highlighting
     LineNr       = { fg = zambezi }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
     CursorLineNr = { fg = silver_rust }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
-    MatchParen   = { fg = wewak, gui="bold" }, -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
+    MatchParen   = { fg = wewak, style ="bold" }, -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
     -- ModeMsg      = { }, -- 'showmode' message (e.g., "-- INSERT -- ")
     -- MsgArea      = { }, -- Area for messages and cmdline
     -- MsgSeparator = { }, -- Separator for scrolled messages, `msgsep` flag of 'display'
@@ -178,7 +180,7 @@ theme.loadSyntax = function()
     -- Define         = { }, --   preprocessor #define
     -- Macro          = { }, --    same as Define
     -- PreCondit      = { }, --  preprocessor #if, #else, #endif, etc.
-    Type           = { fg = koromiko, gui="italic" }, -- (preferred) int, long, char, etc.
+    Type           = { fg = koromiko, style="italic" }, -- (preferred) int, long, char, etc.
     -- StorageClass   = { }, -- static, register, volatile, etc.
     Structure      = { fg = morning_glory }, --  struct, union, enum, etc.
     -- Typedef        = { }, --  A typedef
@@ -199,8 +201,7 @@ theme.loadSyntax = function()
 
 	-- Italic comments
   -- TODO: italic
-	if vim.g.jellybeans_italic == false then
-	else
+	if vim.g.jellybeans_italic == true then
 	end
 
 	return syntax
@@ -224,7 +225,7 @@ theme.loadTreeSitter = function()
 	-- TreeSitter highlight groups
 
 	local treesitter = {
-        -- TSAnnotation        { };    -- For C++/Dart attributes, annotations that can be attached to the code to denote some kind of meta information.
+    -- TSAnnotation        { };    -- For C++/Dart attributes, annotations that can be attached to the code to denote some kind of meta information.
     -- TSAttribute         = { };    -- (unstable) TODO: docs
     -- TSBoolean           = { };    -- For booleans.
     -- TSCharacter         = { };    -- For characters.
@@ -246,8 +247,8 @@ theme.loadTreeSitter = function()
     -- TSFuncBuiltin       = { };    -- For builtin functions: `table.insert` in Lua.
     -- TSFuncMacro         = { };    -- For macro defined fuctions (calls and definitions): each `macro_rules` in Rust.
     TSInclude = { fg = syntax.keyword }, -- For includes: `#include` in C, `use` or `extern crate` in Rust, or `require` in Lua.
-    TSKeyword = { fg = syntax.keyword, gui="italic" }, -- For keywords that don't fall in previous categories.
-    TSKeywordFunction = { fg = syntax.keyword, gui="italic" }, -- For keywords used to define a fuction.
+    TSKeyword = { fg = syntax.keyword, style ="italic" }, -- For keywords that don't fall in previous categories.
+    TSKeywordFunction = { fg = syntax.keyword, style ="italic" }, -- For keywords used to define a fuction.
     TSLabel = { fg = perano }, -- For labels: `label:` in C and `:label:` in Lua.
     -- TSMethod            = { };    -- For method calls and definitions.
     -- TSNone              = { };    -- TODO: docs
@@ -271,11 +272,11 @@ theme.loadTreeSitter = function()
     -- TSText              = { };    -- For strings considered text in a markup language.
     TSTextReference = { fg = old_brick }, -- FIXME
     TSNamespace          = { fg = wewak },    -- For identifiers referring to modules and namespaces.
-    TSVariable           = { Normal, gui="NONE" };    -- Any variable name that does not have another highlight.
+    TSVariable           = { Normal, style ="NONE" };    -- Any variable name that does not have another highlight.
     TSTagDelimiter       = { fg = bayoux_blue },    -- Tag delimiter like `<` `>` `/`
     TSEmphasis           = { Italic },    -- For text to be represented with emphasis.
     TSUnderline          = { Underlined },    -- For text to be represented with an underline.
-    TSStrike             = { gui="strikethrough" },    -- For strikethrough text.
+    TSStrike             = { style ="strikethrough" },    -- For strikethrough text.
     TSURI                = { fg = morning_glory },    -- Any URI like a link or email.
 	}
 
@@ -311,10 +312,10 @@ theme.loadLSP = function()
     LspDiagnosticsVirtualTextWarning     = { LspDiagnosticsDefaultWarning, bg = koromiko }, -- Used for "Warning" diagnostic virtual text
     LspDiagnosticsVirtualTextInformation = { LspDiagnosticsDefaultInformation, bg = perano }, -- Used for "Information" diagnostic virtual text
     LspDiagnosticsVirtualTextHint        = { LspDiagnosticsDefaultHint, bg = tea_green }, -- Used for "Hint" diagnostic virtual text
-    LspDiagnosticsUnderlineError         = { sp = old_brick, gui="undercurl" }, -- Used to underline "Error" diagnostics
-    LspDiagnosticsUnderlineWarning       = { sp = koromiko, gui="undercurl" }, -- Used to underline "Warning" diagnostics
-    LspDiagnosticsUnderlineInformation   = { sp = perano, gui="undercurl" }, -- Used to underline "Information" diagnostics
-    LspDiagnosticsUnderlineHint          = { sp = tea_green, gui="undercurl" }, -- Used to underline "Hint" diagnostics
+    LspDiagnosticsUnderlineError         = { sp = old_brick, style ="undercurl" }, -- Used to underline "Error" diagnostics
+    LspDiagnosticsUnderlineWarning       = { sp = koromiko, style ="undercurl" }, -- Used to underline "Warning" diagnostics
+    LspDiagnosticsUnderlineInformation   = { sp = perano, style ="undercurl" }, -- Used to underline "Information" diagnostics
+    LspDiagnosticsUnderlineHint          = { sp = tea_green, style ="undercurl" }, -- Used to underline "Hint" diagnostics
     -- LspDiagnosticsFloatingError          = { }, -- Used to color "Error" diagnostic messages in diagnostics float
     -- LspDiagnosticsFloatingWarning        = { }, -- Used to color "Warning" diagnostic messages in diagnostics float
     -- LspDiagnosticsFloatingInformation    = { }, -- Used to color "Information" diagnostic messages in diagnostics float
