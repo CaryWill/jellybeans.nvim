@@ -353,7 +353,7 @@ theme.loadPlugins = function()
 
     -- Telescope
     TelescopeBorder = { fg = ship_cove },
-    TelescopeSelection = { fg = ship_cove, bg = ship_cove},
+    TelescopeSelection = { fg = ship_cove },
     TelescopeMatching = { Search },
     TelescopeSelectionCaret = { fg = koromiko },
     TelescopePromptPrefix = { fg = koromiko },

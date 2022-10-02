@@ -4,8 +4,6 @@ lua << EOF
 package.loaded['jellybeans'] = nil
 package.loaded['jellybeans.util'] = nil
 package.loaded['jellybeans.theme'] = nil
-package.loaded['jellybeans.functions'] = nil
-package.loaded['jellybeans.named_colors'] = nil
 
 require('jellybeans').set()
 EOF
