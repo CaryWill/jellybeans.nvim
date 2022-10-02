@@ -7,3 +7,5 @@ package.loaded['jellybeans.theme'] = nil
 
 require('jellybeans').set()
 EOF
+
+nnoremap <leader>r :colorscheme jellybeans<CR>

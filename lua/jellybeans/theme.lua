@@ -96,7 +96,6 @@ local theme = {}
 theme.loadSyntax = function()
 	-- Syntax highlight groups
 	local syntax = {
-    Comment  = { fg = gray }, -- any comment
     ColorColumn  = { bg = total_black }, -- used for the columns set with 'colorcolumn'
     Conceal      = { fg = morning_glory }, -- placeholder characters substituted for concealed text (see 'conceallevel')
     Cursor       = { fg = background, bg = perano }, -- character under the cursor
@@ -166,8 +165,6 @@ theme.loadSyntax = function()
     -- Number         = { }, --   a number constant: 234, 0xff
     -- Boolean        = { }, --  a boolean constant: TRUE, false
     -- Float          = { }, --    a floating point constant: 2.3e10
-    Identifier     = { fg = biloba_flower }, -- (preferred) any variable name
-    Function       = { fg = goldenrod }, -- function name (also: methods for classes)
     Statement      = { fg = perano }, -- (preferred) any statement
     -- Conditional    = { }, --  if, then, else, endif, switch, etc.
     -- Repeat         = { }, --   for, do, while, etc.
@@ -199,10 +196,18 @@ theme.loadSyntax = function()
     Todo           = { fg = silver }, -- (preferred) anything that needs extra attention; mostly the keywords TODO FIXME and XXX
 	}
 
-	-- Italic comments
-  -- TODO: italic
+	-- Italic
 	if vim.g.jellybeans_italic == true then
-	end
+		syntax.Comment = { fg = gray, bg = none, style = "italic" } -- italic comments
+		syntax.Function = { fg = goldenrod, bg = none, style = "italic" } -- function name (also: methods for classes)
+    syntax.Identifier = { fg = biloba_flower, bg = none, style = "italic" } -- (preferred) any variable name
+    syntax.String = { fg = green_smoke, bg = none, style = "italic" } --  a string constant: "this is a string"
+  else
+		syntax.Comment = { fg = gray } -- italic comments
+		syntax.Function = { fg = goldenrod } -- function name (also: methods for classes)
+    syntax.Identifier = { fg = biloba_flower } -- (preferred) any variable name
+    syntax.String = { fg = green_smoke } --  a string constant: "this is a string"
+  end
 
 	return syntax
 end
@@ -214,7 +219,6 @@ theme.loadEditor = function()
 	}
 
 	-- Options:
-  -- TODO: Later 
 	return editor
 end
 
@@ -241,14 +245,11 @@ theme.loadTreeSitter = function()
     -- TSConstMacro        = { };    -- For constants that are defined by macros: `NULL` in C.
     -- TSError             = { };    -- For syntax/parser errors.
     -- TSException         = { };    -- For exception related keywords.
-    TSField = { fg = fg }, -- For fields.
     -- TSFloat             = { };    -- For floats.
     -- TSFunction          = { };    -- For function (calls and definitions).
     -- TSFuncBuiltin       = { };    -- For builtin functions: `table.insert` in Lua.
     -- TSFuncMacro         = { };    -- For macro defined fuctions (calls and definitions): each `macro_rules` in Rust.
     TSInclude = { fg = syntax.keyword }, -- For includes: `#include` in C, `use` or `extern crate` in Rust, or `require` in Lua.
-    TSKeyword = { fg = syntax.keyword, style ="italic" }, -- For keywords that don't fall in previous categories.
-    TSKeywordFunction = { fg = syntax.keyword, style ="italic" }, -- For keywords used to define a fuction.
     TSLabel = { fg = perano }, -- For labels: `label:` in C and `:label:` in Lua.
     -- TSMethod            = { };    -- For method calls and definitions.
     -- TSNone              = { };    -- TODO: docs
@@ -256,14 +257,11 @@ theme.loadTreeSitter = function()
     TSOperator = { fg = syntax.keyword }, -- For any operator: `+`, but also `->` and `*` in C.
     TSParameter = { fg = syntax.func_param }, -- For parameters of a function.
     -- TSParameterReference = { };    -- For references to parameters of a function.
-    TSProperty = { fg = syntax.func }, -- Same as `TSField`.
     TSPunctDelimiter = { fg = fg }, -- For delimiters ie: `.`
     TSPunctBracket = { fg = fg }, -- For brackets and parens.
     TSPunctSpecial = { fg = fg }, -- For special punctutation that does not fall in the catagories before.
     -- TSRepeat            = { };    -- For keywords related to loops.
     -- TSString            = { };    -- For strings.
-    TSStringRegex = { fg = syntax.variable }, -- For regexes.
-    TSStringEscape = { fg = old_brick }, -- For escape characters within a string.
     -- TSSymbol            = { };    -- For identifiers referring to symbols or atoms.
     TSType = { fg = syntax.keyword }, -- For types.
     -- TSTypeBuiltin       = { };    -- For builtin types.
@@ -271,7 +269,6 @@ theme.loadTreeSitter = function()
     TSTag = { fg = syntax.tag }, -- Tags like html tag names.
     -- TSText              = { };    -- For strings considered text in a markup language.
     TSTextReference = { fg = old_brick }, -- FIXME
-    TSNamespace          = { fg = wewak },    -- For identifiers referring to modules and namespaces.
     TSVariable           = { Normal, style ="NONE" };    -- Any variable name that does not have another highlight.
     TSTagDelimiter       = { fg = bayoux_blue },    -- Tag delimiter like `<` `>` `/`
     TSEmphasis           = { Italic },    -- For text to be represented with emphasis.
@@ -280,9 +277,40 @@ theme.loadTreeSitter = function()
     TSURI                = { fg = morning_glory },    -- Any URI like a link or email.
 	}
 
-  -- TODO:
-	if vim.g.jellybeans_italic == false then
+	if vim.g.jellybeans_italic == true then
+		-- Comments
+		treesitter.TSComment = { fg = gray, style = "italic" }
+		-- Function names
+		treesitter.TSFunction = { fg = goldenrod, style = "italic" } -- For fuction (calls and definitions).
+		-- Namespaces and property accessors
+    treesitter.TSNamespace = { fg = wewak, style = "italic" }    -- For identifiers referring to modules and namespaces.
+    treesitter.TSField = { fg = fg, style = "italic" } -- For fields.
+    treesitter.TSProperty = { fg = syntax.func, style = "italic" } -- Same as `TSField`.
+
+		-- Language keywords
+    treesitter.TSKeyword = { fg = syntax.keyword, style ="italic" } -- For keywords that don't fall in previous categories.
+    treesitter.TSKeywordFunction = { fg = syntax.keyword, style ="italic" } -- For keywords used to define a fuction.
+		-- Strings
+		treesitter.TSString = { fg = green_smoke, style = "italic" } -- For strings.
+    treesitter.TSStringRegex = { fg = syntax.variable, style = "italic" } -- For regexes.
+    treesitter.TSStringEscape = { fg = old_brick, style = "italic" } -- For escape characters within a string.
 	else
+ 		-- Comments
+		treesitter.TSComment = { fg = gray }
+		-- Function names
+		treesitter.TSFunction = { fg = goldenrod } -- For fuction (calls and definitions).
+		-- Namespaces and property accessors
+    treesitter.TSNamespace = { fg = wewak }    -- For identifiers referring to modules and namespaces.
+    treesitter.TSField = { fg = fg } -- For fields.
+    treesitter.TSProperty = { fg = syntax.func } -- Same as `TSField`.
+
+		-- Language keywords
+    treesitter.TSKeyword = { fg = syntax.keyword } -- For keywords that don't fall in previous categories.
+    treesitter.TSKeywordFunction = { fg = syntax.keyword } -- For keywords used to define a fuction.
+		-- Strings
+		treesitter.TSString = { fg = green_smoke } -- For strings.
+    treesitter.TSStringRegex = { fg = syntax.variable } -- For regexes.
+    treesitter.TSStringEscape = { fg = old_brick } -- For escape characters within a string.
 	end
 
 	return treesitter
@@ -402,6 +430,7 @@ theme.loadPlugins = function()
     javascriptTSProperty = { fg = syntax.func },
     regexTSStringEscape = { fg = syntax.keyword },
 	}
+
 	-- Options:
 
 	return plugins
