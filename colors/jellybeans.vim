@@ -7,4 +7,4 @@ require('jellybeans').set()
 EOF
 
 " Dev only to quickly make change take effect
-"nnoremap <leader>r :colorscheme jellybeans<CR>
+nnoremap <silent><leader>r :source $MYVIMRC<CR>
