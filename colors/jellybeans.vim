@@ -1,6 +1,4 @@
 lua << EOF
--- TODO: rename jellybeans symbol
--- 开发的时候使用 :colorscheme jellybeans 即可重新让样式生效
 package.loaded['jellybeans'] = nil
 package.loaded['jellybeans.util'] = nil
 package.loaded['jellybeans.theme'] = nil
@@ -8,4 +6,5 @@ package.loaded['jellybeans.theme'] = nil
 require('jellybeans').set()
 EOF
 
-nnoremap <leader>r :colorscheme jellybeans<CR>
+" Dev only to quickly make change take effect
+"nnoremap <leader>r :colorscheme jellybeans<CR>
