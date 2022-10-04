@@ -62,7 +62,7 @@ local info = morning_glory
 local hint = brandy
 
 -- Syntax
-local syntax = {
+local syntaxs = {
    comment = bayoux_blue,
    constant = morning_glory,
    variable = morning_glory,
@@ -240,10 +240,10 @@ theme.loadTreeSitter = function()
     TSNote = { fg = bg, bg = info },
     TSWarning = { fg = bg, bg = warning },
     TSDanger = { fg = bg, bg = error },
-    TSConstructor = { fg = syntax.variable }, -- For constructor calls and definitions: `= { }` in Lua, and Java constructors.
+    TSConstructor = { fg = syntaxs.variable }, -- For constructor calls and definitions: `= { }` in Lua, and Java constructors.
     -- TSConditional       = { };    -- For keywords related to conditionnals.
-    TSConstant = { fg = syntax.constant }, -- For constants
-    commentTSConstant = { fg = syntax.keyword },
+    TSConstant = { fg = syntaxs.constant }, -- For constants
+    commentTSConstant = { fg = syntaxs.keyword },
     -- TSConstBuiltin      = { };    -- For constant that are built in the language: `nil` in Lua.
     -- TSConstMacro        = { };    -- For constants that are defined by macros: `NULL` in C.
     -- TSError             = { };    -- For syntax/parser errors.
@@ -252,13 +252,13 @@ theme.loadTreeSitter = function()
     -- TSFunction          = { };    -- For function (calls and definitions).
     -- TSFuncBuiltin       = { };    -- For builtin functions: `table.insert` in Lua.
     -- TSFuncMacro         = { };    -- For macro defined fuctions (calls and definitions): each `macro_rules` in Rust.
-    TSInclude = { fg = syntax.keyword }, -- For includes: `#include` in C, `use` or `extern crate` in Rust, or `require` in Lua.
+    TSInclude = { fg = syntaxs.keyword }, -- For includes: `#include` in C, `use` or `extern crate` in Rust, or `require` in Lua.
     TSLabel = { fg = perano }, -- For labels: `label:` in C and `:label:` in Lua.
     -- TSMethod            = { };    -- For method calls and definitions.
     -- TSNone              = { };    -- TODO: docs
     -- TSNumber            = { };    -- For all numbers
-    TSOperator = { fg = syntax.keyword }, -- For any operator: `+`, but also `->` and `*` in C.
-    TSParameter = { fg = syntax.func_param }, -- For parameters of a function.
+    TSOperator = { fg = syntaxs.keyword }, -- For any operator: `+`, but also `->` and `*` in C.
+    TSParameter = { fg = syntaxs.func_param }, -- For parameters of a function.
     -- TSParameterReference = { };    -- For references to parameters of a function.
     TSPunctDelimiter = { fg = fg }, -- For delimiters ie: `.`
     TSPunctBracket = { fg = fg }, -- For brackets and parens.
@@ -266,10 +266,10 @@ theme.loadTreeSitter = function()
     -- TSRepeat            = { };    -- For keywords related to loops.
     -- TSString            = { };    -- For strings.
     -- TSSymbol            = { };    -- For identifiers referring to symbols or atoms.
-    TSType = { fg = syntax.keyword }, -- For types.
+    TSType = { fg = syntaxs.keyword }, -- For types.
     -- TSTypeBuiltin       = { };    -- For builtin types.
-    TSVariableBuiltin = { fg = syntax.variable }, -- Variable names that are defined by the languages, like `this` or `self`.
-    TSTag = { fg = syntax.tag }, -- Tags like html tag names.
+    TSVariableBuiltin = { fg = syntaxs.variable }, -- Variable names that are defined by the languages, like `this` or `self`.
+    TSTag = { fg = syntaxs.tag }, -- Tags like html tag names.
     -- TSText              = { };    -- For strings considered text in a markup language.
     TSTextReference = { fg = old_brick }, -- FIXME
     TSVariable           = { Normal, style ="NONE" };    -- Any variable name that does not have another highlight.
@@ -281,11 +281,11 @@ theme.loadTreeSitter = function()
 		TSFunction = { fg = goldenrod }, -- For fuction (calls and definitions).
     TSNamespace = { fg = wewak },    -- For identifiers referring to modules and namespaces.
     TSField = { fg = fg }, -- For fields.
-    TSProperty = { fg = syntax.func }, -- Same as `TSField`.
-    TSKeyword = { fg = syntax.keyword }, -- For keywords that don't fall in previous categories.
-    TSKeywordFunction = { fg = syntax.keyword }, -- For keywords used to define a fuction.
+    TSProperty = { fg = syntaxs.func }, -- Same as `TSField`.
+    TSKeyword = { fg = syntaxs.keyword }, -- For keywords that don't fall in previous categories.
+    TSKeywordFunction = { fg = syntaxs.keyword }, -- For keywords used to define a fuction.
 		TSString = { fg = green_smoke }, -- For strings.
-    TSStringRegex = { fg = syntax.variable }, -- For regexes.
+    TSStringRegex = { fg = syntaxs.variable }, -- For regexes.
     TSStringEscape = { fg = old_brick }, -- For escape characters within a string.
 	}
 
@@ -389,30 +389,30 @@ theme.loadPlugins = function()
     gitcommitSummary = { fg = mantis },
 
     -- typescript
-    typescriptTSType = { fg = syntax.func },
-    typescriptTSConstructor = { fg = syntax.func },
-    typescriptTSTypeBuiltin = { fg = syntax.variable },
+    typescriptTSType = { fg = syntaxs.func },
+    typescriptTSConstructor = { fg = syntaxs.func },
+    typescriptTSTypeBuiltin = { fg = syntaxs.variable },
 
     -- CSS
-    cssTSProperty = { fg = syntax.func },
-    cssTSType = { fg = syntax.tag },
+    cssTSProperty = { fg = syntaxs.func },
+    cssTSType = { fg = syntaxs.tag },
 
     -- html
-    htmlTSConstant = { fg = syntax.tag },
+    htmlTSConstant = { fg = syntaxs.tag },
     htmlTag = { fg = fg },
     htmlEndTag = { fg = fg },
-    htmlTagName = { fg = syntax.tag },
-    htmlArg = { fg = syntax.html_arg },
+    htmlTagName = { fg = syntaxs.tag },
+    htmlArg = { fg = syntaxs.html_arg },
 
     -- javascript
     javascriptTSType = { fg = fg },
-    javascriptTSParameter = { fg = syntax.param },
-    javascriptTSVariable = { fg = syntax.variable },
+    javascriptTSParameter = { fg = syntaxs.param },
+    javascriptTSVariable = { fg = syntaxs.variable },
     javascriptTSPunctDelimiter = { fg = fg },
-    javascriptTSStringRegex = { fg = syntax.string },
-    javascriptTSConstructor = { fg = syntax.func },
-    javascriptTSProperty = { fg = syntax.func },
-    regexTSStringEscape = { fg = syntax.keyword },
+    javascriptTSStringRegex = { fg = syntaxs.string },
+    javascriptTSConstructor = { fg = syntaxs.func },
+    javascriptTSProperty = { fg = syntaxs.func },
+    regexTSStringEscape = { fg = syntaxs.keyword },
 	}
 
 	-- Options:
