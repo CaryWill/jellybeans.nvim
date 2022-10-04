@@ -127,7 +127,6 @@ theme.loadSyntax = function()
     -- MsgSeparator = { }, -- Separator for scrolled messages, `msgsep` flag of 'display'
     MoreMsg      = { fg = highland }, -- |more-prompt|
     NonText      = { fg = scorpion }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
-    Normal       = { bg = background, fg = foreground }, -- normal text
     -- NormalFloat  = { }, -- Normal text in floating windows.
     -- NormalNC     = { }, -- normal text in non-current windows
     Pmenu        = { fg = total_white, bg = background }, -- Popup menu: normal item.
@@ -216,6 +215,12 @@ theme.loadEditor = function()
 	}
 
 	-- Options:
+  if vim.g.jellybeans_mode == "light" then
+    editor.Normal = { bg = none, fg = background } -- normal text
+	else
+    editor.Normal = { bg = background, fg = foreground } -- normal text
+	end
+
 	return editor
 end
 
