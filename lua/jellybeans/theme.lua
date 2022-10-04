@@ -6,6 +6,7 @@ local grey       = "#888888"
 local grey_one   = "#1c1c1c"
 local grey_two   = "#f0f0f0"
 local grey_three = "#333333"
+local grey_four = "#495054"
 local regent_grey = "#9098A0"
 local scorpion   = "#606060"
 local cod_grey   = "#101010"
@@ -101,8 +102,8 @@ theme.loadSyntax = function()
     Cursor       = { fg = background, bg = perano }, -- character under the cursor
     -- lCursor      = { }, -- the character under the cursor when |language-mapping| is used (see 'guicursor')
     -- CursorIM     = { }, -- like Cursor, but used when in IME mode |CursorIM|
-    CursorColumn = { bg = grey_one }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
-    CursorLine   = { bg = grey_one }, -- Screen-line at the cursor, when 'cursorline' is set.  Low-priority if foreground (ctermfg OR guifg) is not set.
+    CursorColumn = { bg = grey_four }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
+    CursorLine   = { bg = grey_four }, -- Screen-line at the cursor, when 'cursorline' is set.  Low-priority if foreground (ctermfg OR guifg) is not set.
     Directory    = { fg = brandy }, -- directory names (and other special names in listings)
     DiffAdd = { fg = github.add_fg, bg = github.add }, -- diff mode: Added line |diff.txt|
     DiffChange = { fg = github.change_fg, bg = github.change }, -- diff mode: Changed line |diff.txt|
