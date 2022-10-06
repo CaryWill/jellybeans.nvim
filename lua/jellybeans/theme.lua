@@ -180,7 +180,7 @@ theme.loadSyntax = function()
     -- StorageClass   = { }, -- static, register, volatile, etc.
     Structure      = { fg = morning_glory }, --  struct, union, enum, etc.
     -- Typedef        = { }, --  A typedef
-    Special        = { fg = "#9b1e41" }, -- highland -- (preferred) any special symbol
+    Special        = { fg = wewak }, -- highland -- (preferred) any special symbol
     -- SpecialChar    = { }, --  special character in a constant
     -- Tag            = { }, --    you can use CTRL-] on this
     Delimiter      = { fg = hoki }, --  character that needs attention
