@@ -6,7 +6,6 @@ local grey       = "#888888"
 local grey_one   = "#1c1c1c"
 local grey_two   = "#f0f0f0"
 local grey_three = "#333333"
-local grey_four = "#495054"
 local regent_grey = "#9098A0"
 local scorpion   = "#606060"
 local cod_grey   = "#101010"
@@ -55,7 +54,7 @@ local none = "NONE"
 
 -- Mapping
 local fg = foreground
-local bg = background 
+local bg = background
 local error = wewak
 local warning = koromiko
 local info = morning_glory
@@ -102,8 +101,8 @@ theme.loadSyntax = function()
     Cursor       = { fg = background, bg = perano }, -- character under the cursor
     -- lCursor      = { }, -- the character under the cursor when |language-mapping| is used (see 'guicursor')
     -- CursorIM     = { }, -- like Cursor, but used when in IME mode |CursorIM|
-    CursorColumn = { bg = grey_four }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
-    CursorLine   = { bg = grey_four }, -- Screen-line at the cursor, when 'cursorline' is set.  Low-priority if foreground (ctermfg OR guifg) is not set.
+    CursorColumn = { bg = grey_one }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
+    CursorLine   = { bg = grey_one }, -- Screen-line at the cursor, when 'cursorline' is set.  Low-priority if foreground (ctermfg OR guifg) is not set.
     Directory    = { fg = brandy }, -- directory names (and other special names in listings)
     DiffAdd = { fg = github.add_fg, bg = github.add }, -- diff mode: Added line |diff.txt|
     DiffChange = { fg = github.change_fg, bg = github.change }, -- diff mode: Changed line |diff.txt|
@@ -173,7 +172,7 @@ theme.loadSyntax = function()
     -- Keyword        = { }, --  any other keyword
     -- Exception      = { }, --  try, catch, throw
     PreProc        = { fg = ship_cove }, -- (preferred) generic Preprocessor
-    Include        = { PreProc, style = "italic" }, --  preprocessor #include
+    Include        = { fg = ship_cove, style = "italic" }, --  preprocessor #include
     -- Define         = { }, --   preprocessor #define
     -- Macro          = { }, --    same as Define
     -- PreCondit      = { }, --  preprocessor #if, #else, #endif, etc.
@@ -196,14 +195,14 @@ theme.loadSyntax = function()
     Todo           = { fg = silver }, -- (preferred) anything that needs extra attention; mostly the keywords TODO FIXME and XXX
 		Function = { fg = goldenrod, bg = none }, -- function name (also: methods for classes)
     Identifier = { fg = biloba_flower, bg = none }, -- (preferred) any variable name
-    String = { fg = green_smoke, bg = none }, --  a string constant: "this is a string"
+    Normal = { bg = background, fg = foreground }, -- normal text
 	}
 
 	-- Italic
 	if vim.g.jellybeans_italic == true then
-		syntax.Comment = { fg = gray, bg = none, style = "italic" } -- italic comments
+		syntax.Comment = { fg = grey, bg = none, style = "italic" } -- italic comments
   else
-		syntax.Comment = { fg = gray } -- italic comments
+		syntax.Comment = { fg = grey } -- italic comments
   end
 
 	return syntax
@@ -216,11 +215,6 @@ theme.loadEditor = function()
 	}
 
 	-- Options:
-  if vim.g.jellybeans_mode == "light" then
-    editor.Normal = { bg = none, fg = background } -- normal text
-	else
-    editor.Normal = { bg = background, fg = foreground } -- normal text
-	end
 
 	return editor
 end
@@ -272,10 +266,10 @@ theme.loadTreeSitter = function()
     TSTag = { fg = syntaxs.tag }, -- Tags like html tag names.
     -- TSText              = { };    -- For strings considered text in a markup language.
     TSTextReference = { fg = old_brick }, -- FIXME
-    TSVariable           = { Normal, style ="NONE" };    -- Any variable name that does not have another highlight.
+    TSVariable           = { bg = background, fg = foreground , style ="NONE" };    -- Any variable name that does not have another highlight.
     TSTagDelimiter       = { fg = bayoux_blue },    -- Tag delimiter like `<` `>` `/`
-    TSEmphasis           = { Italic },    -- For text to be represented with emphasis.
-    TSUnderline          = { Underlined },    -- For text to be represented with an underline.
+    TSEmphasis           = { style = "italic" },    -- For text to be represented with emphasis.
+    TSUnderline          = { style = "underline" },    -- For text to be represented with an underline.
     TSStrike             = { style ="strikethrough" },    -- For strikethrough text.
     TSURI                = { fg = morning_glory },    -- Any URI like a link or email.
 		TSFunction = { fg = goldenrod }, -- For fuction (calls and definitions).
@@ -291,10 +285,10 @@ theme.loadTreeSitter = function()
 
 	if vim.g.jellybeans_italic == true then
 		-- Comments
-		treesitter.TSComment = { fg = gray, style = "italic" }
+		treesitter.TSComment = { fg = grey, style = "italic" }
 	else
  		-- Comments
-		treesitter.TSComment = { fg = gray }
+		treesitter.TSComment = { fg = grey }
 	end
 
 	return treesitter
@@ -320,10 +314,10 @@ theme.loadLSP = function()
     LspDiagnosticsDefaultWarning         = { fg = koromiko }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
     LspDiagnosticsDefaultInformation     = { fg = perano }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
     LspDiagnosticsDefaultHint            = { fg = tea_green }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
-    LspDiagnosticsVirtualTextError       = { LspDiagnosticsDefaultError, bg = old_brick }, -- Used for "Error" diagnostic virtual text
-    LspDiagnosticsVirtualTextWarning     = { LspDiagnosticsDefaultWarning, bg = koromiko }, -- Used for "Warning" diagnostic virtual text
-    LspDiagnosticsVirtualTextInformation = { LspDiagnosticsDefaultInformation, bg = perano }, -- Used for "Information" diagnostic virtual text
-    LspDiagnosticsVirtualTextHint        = { LspDiagnosticsDefaultHint, bg = tea_green }, -- Used for "Hint" diagnostic virtual text
+    LspDiagnosticsVirtualTextError       = { fg = old_brick, bg = wewak }, -- Used for "Error" diagnostic virtual text
+    LspDiagnosticsVirtualTextWarning     = { fg = koromiko, bg = koromiko }, -- Used for "Warning" diagnostic virtual text
+    LspDiagnosticsVirtualTextInformation = { fg = perano, bg = perano }, -- Used for "Information" diagnostic virtual text
+    LspDiagnosticsVirtualTextHint        = { fg = tea_green, bg = mantis }, -- Used for "Hint" diagnostic virtual text
     LspDiagnosticsUnderlineError         = { sp = old_brick, style ="undercurl" }, -- Used to underline "Error" diagnostics
     LspDiagnosticsUnderlineWarning       = { sp = koromiko, style ="undercurl" }, -- Used to underline "Warning" diagnostics
     LspDiagnosticsUnderlineInformation   = { sp = perano, style ="undercurl" }, -- Used to underline "Information" diagnostics
@@ -367,12 +361,12 @@ theme.loadPlugins = function()
     -- Telescope
     TelescopeBorder = { fg = ship_cove },
     TelescopeSelection = { fg = ship_cove },
-    TelescopeMatching = { Search },
+    TelescopeMatching = { fg = wewak, bg = cocoa_brown },
     TelescopeSelectionCaret = { fg = koromiko },
     TelescopePromptPrefix = { fg = koromiko },
 
     -- vim-sneak
-    Sneak = { Search },
+    Sneak = { fg = wewak, bg = cocoa_brown },
 
     -- NeoVim
     healthError = { fg = wewak },
